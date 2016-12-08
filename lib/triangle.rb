@@ -2,9 +2,6 @@ class Triangle
   attr_accessor :side1, :side2, :side3, :triangle_sides
 
   def initialize(side1, side2, side3)
-    @side1 = side1
-    @side2 = side2
-    @side3 = side3
     @triangle_sides = []
     @triangle_sides << side1
     @triangle_sides << side2
@@ -12,14 +9,14 @@ class Triangle
   end
 
   def kind
-    if valid?
-      if @triangle_sides.uniq.count == 1
-        return :equilateral
-      elsif @triangle_sides.uniq.count == 2
-        return :isosceles
-      elsif @triangle_sides.uniq.count == 3
-        return :scalene
-      end
+     valid?
+      case @triangle_sides.uniq.count
+      when 1
+       :equilateral
+      when 2
+       :isosceles
+      else
+       :scalene
     end
   end
 
@@ -27,13 +24,9 @@ end
 
   def valid?
     if @triangle_sides.any? {|side| side <= 0}
-      false
       raise TriangleError.new
     elsif @triangle_sides.sort[0]+ @triangle_sides.sort[1] <= @triangle_sides.sort[2]
-      false
       raise TriangleError.new
-    else
-      true
     end
   end
 
