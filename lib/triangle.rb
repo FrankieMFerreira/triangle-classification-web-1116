@@ -22,7 +22,7 @@ end
   def valid?
     if @triangle_sides.any? {|side| side <= 0}
       raise TriangleError.new
-    elsif @triangle_sides.sort[0]+ @triangle_sides.sort[1] <= @triangle_sides.sort[2]
+    elsif @triangle_sides[0]+ @triangle_sides[1] <= @triangle_sides[2]
       raise TriangleError.new
     end
   end
